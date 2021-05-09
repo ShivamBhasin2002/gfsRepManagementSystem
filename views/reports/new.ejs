@@ -1,0 +1,90 @@
+<%- include("../partials/header") %>
+
+<div class="jumbotron">
+	<div class="container">
+		<h1 class="ui huge header center aligned">Enter Report For: <%=record.name%>(<%=term%>)</h1>
+	</div>
+</div>
+
+<form action="/reports/create" method="POST">
+	<input type="text" name="report[term]" class="hidden" value="<%=term%>">
+	<input type="text" name="report[std]" class="hidden" value="<%=record.std%>">
+	<input type="text" name="report[sec]" class="hidden" value="<%=record.sec%>">
+	<div class="ui container">
+		<table class="table table-bordered table-striped table-responsive">
+			<thead>
+				<tr>
+					<th>Admin No.</th>
+					<th>Name</th>
+					<%record.subjects.forEach(sub => {%>
+						<th <%if((record.std<=8)&&(term=="SA1" || term=="SA2")){%> colspan="3" <%} else if((record.std<=12 && record.std>10) &&(term=="SA1" || term=="SA2")){%> colspan="2" <%}%>><%=sub%></th>
+					<%});%>
+					<%if((record.std<=8)&&(term=="SA1" || term=="SA2")){%>
+						<%co.forEach(sub => {%>
+							<th><%=sub%></th>
+						<%});%>
+					<%}%>
+				</tr>
+				<tr>
+					<th></th>
+					<th></th>
+					<%record.subjects.forEach(sub => {%>
+						<%if((record.std<=8)&&(term=="SA1" || term=="SA2")){%>
+							<th>Notebook</th>
+							<th>Subject Enrichment</th>
+						<%} else if((record.std<=12 && record.std>10) && (term=="SA1" || term=="SA2")){%>
+							<th>Practical</th>
+						<%}%>
+						<th>Theory</th>
+					<%});%>
+					<%if((record.std<=8)&&(term=="SA1" || term=="SA2")){%>
+						<%co.forEach(sub => {%>
+							<th>Grade</th>
+						<%});%>
+					<%}%>
+				</tr>
+				<tr>
+					<th></th>
+					<th>TOTAL MARKS</th>
+					<%record.subjects.forEach(sub => {%>
+						<%if((record.std<=8)&&(term=="SA1" || term=="SA2")){%>
+							<th id="td"><input id="report" type="number" name="report[total][<%=sub%>][notebook]" value="0"></th>
+							<th id="td"><input id="report" type="number" name="report[total][<%=sub%>][enrichment]" value="0"></th>
+						<%} else if((record.std<=12 && record.std>10) && (term=="SA1" || term=="SA2")){%>
+							<th id="td"><input id="report" type="number" name="report[total][<%=sub%>][practical]" value="0"></th>
+						<%}%>
+						<th id="td"><input id="report" type="number" name="report[total][<%=sub%>][marks]" value="0"></th>
+					<%});%>
+					<%if((record.std<=8)&&(term=="SA1" || term=="SA2")){%>
+						<%co.forEach(sub => {%>
+							<th></th>
+						<%});%>
+					<%}%>
+				</tr>
+			</thead>
+			<tbody> 
+				<tr>
+					<td id="td"><input name="report[admno]" id="report" type="number" value="<%=record.admno%>" readonly></td>
+					<td><%=record.name%></td>
+					<%record.subjects.forEach(sub => {%>
+						<%if((record.std<=8)&&(term=="SA1" || term=="SA2")){%>
+							<td id="td"><input id="report" type="number" name="report[reports][<%=sub%>][notebook]" value="0"></td>
+							<td id="td"><input id="report" type="number" name="report[reports][<%=sub%>][enrichment]" value="0"></td>
+						<%} else if((record.std<=12 && record.std>10) && (term=="SA1" || term=="SA2")){%>
+							<td id="td"><input id="report" type="number" name="report[reports][<%=sub%>][practical]" value="0"></td>
+						<%}%>
+						<td id="td"><input id="report" type="number" name="report[reports][<%=sub%>][marks]" value="0"></td>
+					<%});%>
+					<%if((record.std<=8)&&(term=="SA1" || term=="SA2")){%>
+						<%co.forEach(sub => {%>
+							<td><input id="report" type="text" name="report[coscholastic][<%=sub%>]"></td>
+						<%});%>
+					<%}%>
+				</tr>
+			</tbody>
+		</table>
+		<button type="submit" class="ui primary button" id="button">Submit</button>
+	</div>
+</form>
+
+<%- include("../partials/footer") %>

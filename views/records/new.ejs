@@ -1,0 +1,48 @@
+<%- include("../partials/header") %>
+	
+	<div class="ui main text container segment">
+		<div class="ui warning message <%=clas%>">
+			<div class="header">
+				<%=message%>
+			</div>
+		</div>
+		<div class="ui center aligned huge header">ADD RECORD</div>
+		<form class="ui huge form" action="/records/create" method="POST">
+			<div class="two fields">
+				<div class="field">
+					<label>Admission N0.</label>
+					<input placeholder="Admission N0." type="number" name="record[admno]" required>
+				</div>
+				<div class="field">
+					<label>Full Name</label>
+					<input placeholder="Full Name" type="text" name="record[name]" required>
+				</div>
+			</div>
+			<div class="ui field">
+				<label>Father's Name</label>
+				<input type="text" placeholder="Father's Name" name="record[fname]" required>
+			</div>
+			<div class="two fields">
+				<div class="field">
+					<label>Class</label>
+					<input placeholder="std:" type="number" name="record[std]" required>
+				</div>
+				<div class="field">
+					<label>Section</label>
+					<input placeholder="sec:" type="text" name="record[sec]" class="sec" required>
+				</div>
+			</div>
+			<div class="two fields">
+				<label style="margin-right: 20px; margin-left: 10px">Subjects</label>
+				<select name="record[subjects]" class="ui search selection dropdown" id="multi-select" multiple="">
+					<option value="">Subjects</option>
+					<% subjects.forEach( sub => {%>
+					<option value="<%=sub%>"><%=sub%></option>
+					<%})%>
+				</select>
+			</div>
+			<button class="ui blue submit button">Submit</button>
+		</form>
+	</div>
+
+<%- include("../partials/footer") %>

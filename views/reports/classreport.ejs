@@ -1,0 +1,107 @@
+<%- include("../partials/header") %>
+
+<div class="jumbotron">
+	<div class="container">
+		<h1 class="ui huge header center aligned">Enter Report For: <%=std%> - <%=sec%>(<%=term%>)</h1>
+	</div>
+</div>
+
+
+
+<form action="/classreport/create" method="POST">
+	<input type="text" name="term" class="hidden" value="<%=term%>">
+	<input type="text" name="std" class="hidden" value="<%=std%>">
+	<input type="text" name="sec" class="hidden" value="<%=sec%>">
+	<div class="ui container">
+		<table class="table table-bordered table-striped table-responsive">
+			<thead>
+				<tr>
+					<th>Admin No.</th>
+					<th>Name</th>
+					<%subjects.forEach(sub => {%>
+						<th <%if((std<=8)&&(term=="SA1" || term=="SA2")){%> colspan="3" <%} else if((std<=12 && std>10) &&(term=="SA1" || term=="SA2")){%> colspan="2" <%}%>><%=sub%></th>
+					<%});%>
+					<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+						<%co.forEach(sub => {%>
+							<th><%=sub%></th>
+						<%});%>
+					<%}%>
+				</tr>
+				<tr>
+					<th></th>
+					<th></th>
+					<%subjects.forEach(sub => {%>
+						<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+							<th>Notebook</th>
+							<th>Subject Enrichment</th>
+						<%} else if((std<=12 && std>10) && (term=="SA1" || term=="SA2")){%>
+							<th>Practical</th>
+						<%}%>
+						<th>Theory</th>
+					<%});%>
+					<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+						<%co.forEach(sub => {%>
+							<th>GRADE</th>
+						<%});%>
+					<%}%>
+				</tr>
+				<tr>
+					<th></th>
+					<th>TOTAL MARKS</th>
+					<%subjects.forEach(sub => {%>
+						<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+							<th id="td"><input id="report" type="number" name="total[<%=sub%>][notebook]" value="0"></th>
+							<th id="td"><input id="report" type="number" name="total[<%=sub%>][enrichment]" value="0"></th>
+						<%} else if((std<=12 && std>10) && (term=="SA1" || term=="SA2")){%>
+							<th id="td"><input id="report" type="number" name="total[<%=sub%>][practical]" value="0"></th>
+						<%}%>
+						<th id="td"><input id="report" type="number" name="total[<%=sub%>][marks]" value="0"></th>
+					<%});%>
+					<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+						<%co.forEach(sub => {%>
+							<th></th>
+						<%});%>
+					<%}%>
+				</tr>
+			</thead>
+			<tbody>
+				<%records.forEach( (record,i) => {%>
+					<input type="text" name="report[<%=i%>][term]" class="hidden" value="<%=term%>">
+					<input type="number" name="report[<%=i%>][std]" class="hidden" value="<%=std%>">
+					<input type="text" name="report[<%=i%>][sec]" class="hidden" value="<%=sec%>">
+					<tr>
+						<td id="td"><input name="report[<%=i%>][admno]" id="report" type="number" value="<%=record.admno%>" readonly></td>
+						<td><%=record.name%></td>
+						<%subjects.forEach(sub => {%>
+							<%if(record.subjects.includes(sub)){%>
+								<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+									<td id="td"><input id="report" type="number" name="report[<%=i%>][reports][<%=sub%>][notebook]" value="0"></td>
+									<td id="td"><input id="report" type="number" name="report[<%=i%>][reports][<%=sub%>][enrichment]" value="0"></td>
+								<%} else if((std<=12 && std>10) && (term=="SA1" || term=="SA2")){%>
+									<th id="td"><input id="report" type="number" name="report[<%=i%>][reports][<%=sub%>][practical]" value="0"></th>
+								<%}%>
+								<td id="td"><input id="report" type="number" name="report[<%=i%>][reports][<%=sub%>][marks]" value="0"></td>
+							<%} else{%>
+								<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+									<td></td>
+									<td></td>
+								<%} else if((std<=12 && record.std>10) && (term=="SA1" || term=="SA2")){%>
+									<td></td>
+								<%}%>
+								<td></td>
+							<%}%>
+						<%});%>
+						<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+							<%co.forEach(sub => {%>
+								<td><input id="report" type="text" name="report[<%=i%>][coscholastic][<%=sub%>]"></td>
+							<%});%>
+						<%}%>
+					</tr>
+				<%});%>
+			</tbody>
+		</table>
+		<button type="submit" class="ui primary button" id="button">Submit</button>
+	</div>
+</form>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,27 @@
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+	<script>
+		$('#multi-select').dropdown();
+		$('#update_record').on('click',()=>{$('#update_record_form').slideToggle();$('#show_record_form').slideUp();$('#new_report_form').slideUp();$('#update_report_form').slideUp();$('#class_report_form').slideUp();$('#print_report_form').slideUp();$('#show_report_form').slideUp();});
+		$('#show_record').on('click',()=>{$('#show_record_form').slideToggle();$('#update_record_form').slideUp();$('#new_report_form').slideUp();$('#update_report_form').slideUp();$('#class_report_form').slideUp();$('#print_report_form').slideUp();$('#show_report_form').slideUp();});
+		$('#new_report').on('click',()=>{$('#new_report_form').slideToggle();$('#show_record_form').slideUp();$('#update_record_form').slideUp();$('#update_report_form').slideUp();$('#class_report_form').slideUp();$('#print_report_form').slideUp();$('#show_report_form').slideUp();});
+		$('#update_report').on('click',()=>{$('#update_report_form').slideToggle();$('#show_record_form').slideUp();$('#new_report_form').slideUp();$('#update_record_form').slideUp();$('#class_report_form').slideUp();$('#print_report_form').slideUp();$('#show_report_form').slideUp();});
+		$('#class_report').on('click',()=>{$('#class_report_form').slideToggle();$('#show_record_form').slideUp();$('#new_report_form').slideUp();$('#update_report_form').slideUp();$('#update_record_form').slideUp();$('#print_report_form').slideUp();$('#show_report_form').slideUp();});
+		$('#print_report').on('click',()=>{$('#print_report_form').slideToggle();$('#show_record_form').slideUp();$('#new_report_form').slideUp();$('#update_report_form').slideUp();$('#class_report_form').slideUp();$('#update_record_form').slideUp();$('#show_report_form').slideUp();});
+		$('#show_report').on('click', () => {$('#show_report_form').slideToggle();$('#show_record_form').slideUp();$('#new_report_form').slideUp();$('#update_report_form').slideUp();$('#class_report_form').slideUp();$('#print_report_form').slideUp();$('#update_record_form').slideUp();});
+		$('.section').on('change',()=>{$('.section').val($('.section').val().toUpperCase());});
+		$('.sec').on('change',()=>{$('.sec').val($('.sec').val().toUpperCase());});
+		$('.sec1').on('change',()=>{$('.sec1').val($('.sec1').val().toUpperCase());});
+		$('.sec2').on('change',()=>{$('.sec2').val($('.sec2').val().toUpperCase());});
+		$('.sec3').on('change',()=>{$('.sec3').val($('.sec3').val().toUpperCase());});
+		$('.dropdown').dropdown();
+		$('#add').keypress(event => {
+			if(event.which == 13 || event.which == 32){
+				$('select').append('<option value="'+ $("#add").val() +'" selected>'+ $("#add").val() +'</option>');
+				$("#add").val(undefined);
+				event.preventDefault();
+			}
+		});
+	</script>
+	</body>
+</html>

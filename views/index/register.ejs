@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GFS</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	<style>
+		body{
+			background: url(http://www.greenfieldsschool.co.in/wp-content/uploads/2014/07/slide2.jpg);
+			background-size: cover;
+			background-repeat: no-repeat;
+			opacity: .8;
+		}
+		img{
+			position: absolute;
+			transform: rotate(90deg);
+			width: 42%;
+			top: 145px;
+			left: 450px;
+		}
+		input[type="email"]{
+			width: 90%;
+		}
+		input[type="password"]{
+			width: 90%;
+		}
+		#special{
+			margin-left: 35%;
+			margin-top: 10%;
+			background-color: #f5f7f6;
+			width: 30%;
+			padding: 5%;
+			border-radius: 10%;
+		}
+	</style>
+</head>
+<body>
+	<div id="special">
+		<h1 class="op"><strong>Sign Up</strong></h1>
+		<form action="\register" method="POST">
+			<div class="form-group op">
+		    	<label for="username">Useranme</label>
+		    	<input type="rext" class="form-control" id="username" placeholder="Username" name="username" required>
+		  	</div>
+		  	<div class="form-group op">
+		    	<label for="password">Password</label>
+		    	<input type="password" class="form-control" id="password" placeholder="Password" name="password" required minlength="4">
+		  	</div>
+		  	<button type="submit" class="btn btn-primary op">Submit</button>
+		</form>
+	</div>
+</body>
+</html>

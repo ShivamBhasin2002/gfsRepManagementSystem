@@ -1,0 +1,47 @@
+<%- include("../partials/header") %>
+
+<div class="ui cards container segment">
+	<%records.forEach((record,i) => {%>
+	  <div class="card">
+		<div class="content">
+		  <div class="header">
+			<%=i+1%>. <%=record.name%>
+		  </div>
+		  <div class="meta">
+			Admission No.:-
+			<%=record.admno%>
+		  </div>
+		  <div class="meta">
+			Father's Name:-
+			<%=record.fname%>
+		  </div>
+		  <div class="description">
+			  <strong>Class: </strong><%=record.std%>-<%=record.sec%>
+			  <table class="ui table">
+				  <thead>
+					<tr>
+					  <th>S.No.</th>
+					  <th>Subject</th>
+					</tr>
+				  </thead>
+				  <tbody>
+				  <%record.subjects.forEach( (sub,i) =>{%>
+					<tr>
+					  <td><%=i+1%></td>
+					  <td><%=sub%></td>
+					</tr>
+				  <%});%>
+				  </tbody>
+				</table>
+		  </div>
+		</div>
+		<div class="extra content">
+		  <div class="ui two buttons">
+			<a class="ui basic green button" href="/records/<%=record.admno%>/edit">Update</a>
+		  </div>
+		</div>
+	  </div>
+	<%});%>
+</div>
+
+<%- include("../partials/footer") %>

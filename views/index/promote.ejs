@@ -1,0 +1,29 @@
+<%- include("../partials/header") %>
+
+	<div class="ui main text container segment">
+		<h1 class="ui center aligned huge header">PROMOTE STUDENTS</h1>
+		<form class="ui massive form" style="margin-top: 80px" action="/promote?_meth=PUT" method="POST">
+			<div class="two fields">
+				<div class="field">
+					<label>Class:</label>
+					<input type="number" placeholder="STD:" name="std">
+				</div>
+				<div class="field">
+					<label>Section:</label>
+					<input type="text" placeholder="SEC:" name="sec" class="sec">
+				</div>
+			</div>
+			<div class="field">
+				<input type="number" id="add" placeholder="Enter Admission Number:-">
+			</div>
+			<div class="two fields" style="margin-top: 40px">
+				<label style="margin-right: 20px; margin-left: 10px">Selected</label>
+				<select name="admnos" class="ui dropdown" id="multi-select" multiple="">
+					<option value="">None</option>
+				</select>
+			</div>
+			<button class="ui blue submit button">Submit</button>
+		</form>
+	</div>
+
+	<%- include("../partials/footer") %>

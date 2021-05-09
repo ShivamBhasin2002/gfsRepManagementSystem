@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>GFS REPORT MANAGEMENT</title>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<style>
+			body{
+				margin-left: 300px;
+				margin-top: 30px;
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+
+			#menu{
+				width: 300px;
+				font-size: 1.5em;
+			}
+
+			#lab{
+				color: white;
+				font-size: 12px;
+				margin-left: 35px;
+			}
+
+			#in{
+				width: 20%;
+			}
+			.hidden{
+				display: none;
+			}
+			._inline{
+				display: inline;
+			}
+			table{
+				text-align: center;
+				border-radius: 13px;
+			}
+			thead{
+				background-color: #287D4E;
+			}
+			#td{
+				padding: 0px;
+			}
+			#report{
+				width: 100%;
+				border: 0px;
+				height: 64.4px;
+				text-align: right;
+				padding: 5px;
+				background-color: rgba(0,0,0,0);
+			}
+			input:focus{
+				outline: none;
+			}
+			input[type=number]::-webkit-inner-spin-button, 
+			input[type=number]::-webkit-outer-spin-button { 
+			  -webkit-appearance: none; 
+			  margin: 0; 
+			}
+			#button{
+				float: right;
+				margin-top: 20px;
+				margin-right: 20px;
+			}
+			#hybrid{
+				width: 70%;
+				margin-left: 30px;
+				margin-top: 10px;
+			}
+			#hybrid-txt{
+				color: black;
+				font-size: 20px;
+			}
+			#add{
+				margin-top: 20px;
+			}
+			#logout{
+				float: right;
+				position: inline;
+			}
+			#print_report_form{
+				margin-top: 10px;
+			}
+		</style>
+		<script data-ad-client="ca-pub-2128020878296126" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	</head>
+	<body>
+		<div class="ui vertical inverted sidebar menu left overlay visible" id="menu">
+			<div class="item">
+				<div class="header">Records Menu</div>
+				<div class="menu">
+					<a class="item" href="/records/new">New Record</a>
+					<a class="item" id="update_record">Update Record</a>
+					<form class="ui mini form hidden" action="/records/edit" method="POST" id="update_record_form">
+						<div class="inline field">
+							<label id="lab">AdminNo.: </label>
+							<input type="number" id="in" name="admno" required>
+							<button class="mini ui submit button float left basic primary">Submit</button>
+						</div>
+					</form>
+					<a class="item" id="show_record">Show Record</a>
+					<form class="ui mini form hidden" action="/records/show" method="POST" id="show_record_form">
+						<div class="inline field">
+							<label id="lab">Class: </label>
+							<input type="number" id="in" name="std" required placeholder="std">
+							<input type="text" id="in" name="sec" required placeholder="sec" class="section">
+							<button class="mini ui submit button float left basic primary">Submit</button>
+						</div>
+					</form>
+					<a class="item" href="/subjects">Enter Class Subjects</a>
+				</div>
+			</div>
+			<div class="item">
+				<div class="header">Reports Menu</div>
+				<div class="menu">
+					<a class="item" id="new_report">New Report</a>
+					<form class="ui mini form hidden" action="/reports/new" method="POST" id="new_report_form">
+						<div class="inline field">
+							<label id="lab">AdminNo.: </label>
+							<input type="number" id="in" name="admno" required>
+							<button class="mini ui submit button float left basic primary">Submit</button>
+							<div class="ui selection dropdown" id="hybrid" class="dropdown">
+								<input type="hidden" name="term" required>
+								<i class="dropdown icon"></i>
+								<div class="default text">Term</div>
+								<div class="menu">
+									<option class="item" value="PT1">PT1</option>
+									<option class="item" value="PT2">PT2</option>
+									<option class="item" value="SA1">SA1</option>
+									<option class="item" value="PT3">PT3</option>
+									<option class="item" value="PT4">PT4</option>
+									<option class="item" value="PreBoard">PreBoard</option>
+									<option class="item" value="SA2">SA2</option>
+								</div>
+							</div>
+						</div>
+					</form>
+					<a class="item" id="update_report">Update Report</a>
+					<form class="ui mini form hidden" action="/reports/edit" method="POST" id="update_report_form">
+						<div class="inline field">
+							<label id="lab">AdminNo.: </label>
+							<input type="number" id="in" name="admno" required>
+							<button class="mini ui submit button float left basic primary">Submit</button>
+							<div class="ui selection dropdown" id="hybrid" class="dropdown">
+								<input type="hidden" name="term" required>
+								<i class="dropdown icon"></i>
+								<div class="default text">Term</div>
+								<div class="menu">
+									<option class="item" value="PT1">PT1</option>
+									<option class="item" value="PT2">PT2</option>
+									<option class="item" value="SA1">SA1</option>
+									<option class="item" value="PT3">PT3</option>
+									<option class="item" value="PT4">PT4</option>
+									<option class="item" value="PreBoard">PreBoard</option>
+									<option class="item" value="SA2">SA2</option>
+								</div>
+							</div>
+						</div>
+					</form>
+					<a class="item" id="show_report">Show Report</a>
+					<form class="ui mini form hidden" action="/reports" method="POST" id="show_report_form">
+						<div class="inline field">
+							<div class="inline field">
+								<label id="lab">Class: </label>
+								<input type="number" id="in" name="std" required placeholder="std">
+								<input type="text" id="in" name="sec" required placeholder="sec" class="sec3">
+								<button class="mini ui submit button float left basic primary">Submit</button>
+							</div>
+							<div class="ui selection dropdown" id="hybrid" class="dropdown">
+								<input type="hidden" name="term" required>
+								<i class="dropdown icon"></i>
+								<div class="default text">Term</div>
+								<div class="menu">
+									<option class="item" value="PT1">PT1</option>
+									<option class="item" value="PT2">PT2</option>
+									<option class="item" value="SA1">SA1</option>
+									<option class="item" value="PT3">PT3</option>
+									<option class="item" value="PT4">PT4</option>
+									<option class="item" value="PreBoard">PreBoard</option>
+									<option class="item" value="SA2">SA2</option>
+								</div>
+							</div>
+						</div>
+					</form>
+					<a class="item" id="class_report">Class Report</a>
+					<form class="ui mini form hidden" action="/classreport/new" method="POST" id="class_report_form">
+						<div class="inline field">
+							<div class="inline field">
+								<label id="lab">Class: </label>
+								<input type="number" id="in" name="std" required placeholder="std">
+								<input type="text" id="in" name="sec" required placeholder="sec" class="sec1">
+								<button class="mini ui submit button float left basic primary">Submit</button>
+							</div>
+							<div class="ui selection dropdown" id="hybrid" class="dropdown">
+								<input type="hidden" name="term" required>
+								<i class="dropdown icon"></i>
+								<div class="default text">Term</div>
+								<div class="menu">
+									<option class="item" value="PT1">PT1</option>
+									<option class="item" value="PT2">PT2</option>
+									<option class="item" value="SA1">SA1</option>
+									<option class="item" value="PT3">PT3</option>
+									<option class="item" value="PT4">PT4</option>
+									<option class="item" value="PreBoard">PreBoard</option>
+									<option class="item" value="SA2">SA2</option>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<a class="item" href="#" id="print_report">Print Report</a>
+			<form class="ui mini form hidden" action="/print" method="POST" id="print_report_form">
+				<div class="inline field">
+					<label id="lab">Class: </label>
+					<input type="number" id="in" name="std" required placeholder="std">
+					<input type="text" id="in" name="sec" required placeholder="sec" class="sec2">
+					<button class="mini ui submit button float left basic primary">Submit</button>
+					<div class="ui selection dropdown" id="hybrid" class="dropdown">
+						<input type="hidden" name="term" required>
+						<i class="dropdown icon"></i>
+						<div class="default text">Term</div>
+						<div class="menu">
+							<option class="item" value="SA1">SA1</option>
+							<option class="item" value="PreBoard">PreBoard</option>
+							<option class="item" value="SA2">SA2</option>
+						</div>
+					</div>
+				</div>
+			</form>
+			<a class="item" href="/promote">Promote</a>
+		</div>
+		<a class="ui primary button" href="/logout" id="logout">Logout</a>

@@ -1,0 +1,29 @@
+<%- include("../partials/header") %>
+	
+	<div class="ui main text container segment">
+		<div class="ui center aligned huge header">ADD CLASS SUBJECTS</div>
+		<form class="ui massive form" action="/subjects?_meth=PUT" method="POST">
+			<div class="two fields">
+				<div class="field">
+					<label>Class</label>
+					<input placeholder="std:" type="number" name="std" required>
+				</div>
+				<div class="field">
+					<label>Section</label>
+					<input placeholder="sec:" type="text" name="sec" class="sec" required>
+				</div>
+			</div>
+			<div class="two fields">
+				<label style="margin-right: 20px; margin-left: 10px">Subjects</label>
+				<select name="subjects" class="ui search selection dropdown" id="multi-select" multiple="">
+					<option value="">Subjects</option>
+					<% subjects.forEach( sub => {%>
+					<option value="<%=sub%>"><%=sub%></option>
+					<%})%>
+				</select>
+			</div>
+			<button class="ui blue submit button">Submit</button>
+		</form>
+	</div>
+
+<%- include("../partials/footer") %>

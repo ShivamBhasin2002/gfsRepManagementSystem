@@ -1,0 +1,24 @@
+<%- include("../partials/header") %>
+
+<table class="ui selectable inverted table">
+	<tr>
+		<th>Admission Number</th>
+		<th>Name</th>
+		<th class="right aligned">Attendence: <input type="number" class="m-1 p-1" id="outOf" placeholder="Out Of"></th>
+		<th class="right aligned"><span style="margin-right: 30px;">Print</span></th>
+	</tr>
+	<tbody>
+		<%records.forEach(record => {%>
+			<tr>
+				<td><%=record.admno%></td>
+				<td><strong><%=record.name%></strong></td>
+				<form action="/print/<%=record.admno%>/<%=term%>" method="POST">
+					<td class="right aligned"></td>
+					<td class="right aligned"><button class="ui primary button" href="">PRINT</a></td>
+				</form>
+			</tr>
+		<%})%>
+    </tbody>
+</table>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,104 @@
+<%- include("../partials/header") %>
+
+<div class="jumbotron">
+	<div class="container">
+		<h1 class="ui huge header center aligned">Enter Report For: <%=std%> - <%=sec%>(<%=term%>)</h1>
+	</div>
+</div>
+
+
+
+<form action="/classreport/create" method="POST">
+	<div class="ui container">
+		<table class="table table-bordered table-striped table-responsive">
+			<thead>
+				<tr>
+					<th>Admin No.</th>
+                    <th>Name</th>
+                    <th>Edit</th>
+					<%subjects.forEach(sub => {%>
+						<th <%if((std<=8)&&(term=="SA1" || term=="SA2")){%> colspan="3" <%} else if((std<=12 && std>10) &&(term=="SA1" || term=="SA2")){%> colspan="2" <%}%>><%=sub%></th>
+					<%});%>
+					<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+						<%co.forEach(sub => {%>
+							<th><%=sub%></th>
+						<%});%>
+					<%}%>
+				</tr>
+				<tr>
+                    <th></th>
+                    <th></th>
+					<th></th>
+					<%subjects.forEach(sub => {%>
+						<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+							<th>Notebook</th>
+							<th>Subject Enrichment</th>
+						<%} else if((std<=12 && std>10) && (term=="SA1" || term=="SA2")){%>
+							<th>Practical</th>
+						<%}%>
+						<th>Theory</th>
+					<%});%>
+					<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+						<%co.forEach(sub => {%>
+							<th>GRADE</th>
+						<%});%>
+					<%}%>
+				</tr>
+				<tr>
+					<th></th>
+					<th></th>
+					<th>TOTAL MARKS</th>
+					<%subjects.forEach(sub => {%>
+						<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+							<th id="td"><input readonly id="report" type="number" value="<%=total[sub].notebook%>"></th>
+							<th id="td"><input readonly id="report" type="number" value="<%=total[sub].enrichment%>"></th>
+						<%} else if((std<=12 && std>10) && (term=="SA1" || term=="SA2")){%>
+							<th id="td"><input readonly id="report" type="number"  value="<%=total[sub].practical%>"></th>
+						<%}%>
+						<th id="td"><input readonly id="report" type="number"  value="<%=total[sub].marks%>"></th>
+					<%});%>
+					<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+						<%co.forEach(sub => {%>
+							<th></th>
+						<%});%>
+					<%}%>
+				</tr>
+			</thead>
+			<tbody>
+				<%records.forEach( (record,i) => {%>
+					<tr>
+						<td id="td"><input readonly id="report" type="number" value="<%=record.admno%>" readonly></td>
+						<td><%=record.name%></td>
+						<td><a class="ui primary button" href="/reports/<%=record.admno%>/<%=term%>/edit">EDIT</a></td>
+						<%subjects.forEach(sub => {%>
+							<%if(record.subjects.includes(sub)){%>
+								<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+									<td id="td"><input readonly id="report" type="number" value="<%=record.report.reports[sub].notebook%>"></td>
+									<td id="td"><input readonly id="report" type="number" value="<%=record.report.reports[sub].enrichment%>"></td>
+								<%} else if((std<=12 && std>10) && (term=="SA1" || term=="SA2")){%>
+									<th id="td"><input readonly id="report" type="number" value="<%=record.report.reports[sub].practical%>"></th>
+								<%}%>
+								<td id="td"><input readonly id="report" type="number" value="<%=record.report.reports[sub].marks%>"></td>
+							<%} else{%>
+								<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+									<td></td>
+									<td></td>
+								<%} else if((std<=12 && record.std>10) && (term=="SA1" || term=="SA2")){%>
+									<td></td>
+								<%}%>
+								<td></td>
+							<%}%>
+						<%});%>
+						<%if((std<=8)&&(term=="SA1" || term=="SA2")){%>
+							<%co.forEach(sub => {%>
+								<td><input readonly id="report" type="text" value="<%=record.report.coscholastic[sub]%>"></td>
+							<%});%>
+						<%}%>
+					</tr>
+				<%});%>
+			</tbody>
+		</table>
+	</div>
+</form>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>GFS</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	<style>
+		html{
+			height: 100%;
+		}
+		body{
+			background: url('https://schools.thelearningpoint.net/pics-cbse/schoolPic65670.JPG');
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+			opacity: 0.8
+		}
+		input[type="email"]{
+			width: 90%;
+		}
+		input[type="password"]{
+			width: 90%;
+		}
+		#special{
+			margin: auto auto;
+			margin-top: 40%;
+			background-color: #f5f7f6;
+			width: 30rem;
+			padding: 5%;
+			border-radius: 10%;
+		}
+		@media (min-width: 768px) {
+			#special{
+				margin-top: 10%;
+				width: 40rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="special">
+		<h1><strong>Sign In</strong></h1>
+		<form action="\login" method="POST">
+			<div class="form-group">
+		    	<label for="username">Useranme</label>
+		    	<input type="rext" class="form-control" id="username" placeholder="Username" name="username" required>
+		  	</div>
+		  	<div class="form-group">
+		    	<label for="password">Password</label>
+		    	<input type="password" class="form-control" id="password" placeholder="Password" name="password" required minlength="4">
+		  	</div>
+		  	<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</body>
+</html>
